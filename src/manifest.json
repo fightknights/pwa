@@ -1,0 +1,21 @@
+{
+  "name": "Serviceworker Demo",
+  "short_name": "ServiceWorker",
+  "icons": [
+    {
+      "src": "assets/icons/images.png",
+      "sizes": "255x255",
+      "type": "image\/png"
+    },
+    {
+      "src": "assets/icons/Twemoji_1f437.png",
+      "sizes": "1024x1024",
+      "type": "image\/png"
+    }
+  ],
+  "theme_color": "#b92b27",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "orientation": "portrait",
+  "start_url": "./?utm_source=web_app_manifest"
+}
