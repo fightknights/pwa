@@ -4,12 +4,12 @@ const path = require('path');
 
 app.set('port', (process.env.PORT || 5000));
 
-app.use(function(req, res, next) {
-  if(!req.secure) {
-    return res.redirect(['https://', req.get('Host'), req.url].join(''));
-  }
-  next();
-});
+// app.use(function(req, res, next) {
+//   if(!req.secure) {
+//     return res.redirect(['https://', req.get('Host'), req.url].join(''));
+//   }
+//   next();
+// });
 
 app.use(express.static(__dirname + '/dist'));
 
