@@ -2,14 +2,19 @@ var express = require('express');
 var app = express();
 const path = require('path');
 
-app.set('port', (process.env.PORT || 5000));
+var port = (process.env.PORT || process.env.VCAP_APP_PORT || 3000);
 
-// app.use(function(req, res, next) {
-//   if(!req.secure) {
-//     return res.redirect(['https://', req.get('Host'), req.url].join(''));
-//   }
-//   next();
-// });
+app.enable('trust proxy');
+
+app.use (function (req, res, next) {
+  if (req.secure) {
+    // request was via https, so do no special handling
+    next();
+  } else {
+    // request was via http, so redirect to https
+    res.redirect('https://' + req.headers.host + req.url);
+  }
+});
 
 app.use(express.static(__dirname + '/dist'));
 
@@ -20,6 +25,6 @@ app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname + '/dist/index.html'));
 });
 
-app.listen(app.get('port'), function(){
-  console.log('Node app is running on port', app.get('port'));
+app.listen(port, function(){
+  console.log('Node app is running on port', port);
 });
