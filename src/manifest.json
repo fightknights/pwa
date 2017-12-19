@@ -3,12 +3,12 @@
   "short_name": "ServiceWorker",
   "icons": [
     {
-      "src": "assets/icons/images.png",
+      "src": "/assets/icons/images.png",
       "sizes": "255x255",
       "type": "image/png"
     },
     {
-      "src": "assets/icons/Twemoji_1f437.png",
+      "src": "/assets/icons/Twemoji_1f437.png",
       "sizes": "1024x1024",
       "type": "image/png"
     }
