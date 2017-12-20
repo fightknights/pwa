@@ -1,0 +1,25 @@
+.menu {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  background-color: beige;
+}
+.logo {
+  margin: 5px 0 0 5px;
+}
+
+.menuItem {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: center;
+}
+.menuItem a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+.menuItem a:hover {
+  color: white;
+}
