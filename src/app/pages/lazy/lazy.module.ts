@@ -15,5 +15,5 @@ import { LazyComponent } from './lazy.component';
   ],
   providers: [],
 })
-export class PeopleModule {
+export class LazyModule {
 }
