@@ -1,6 +1,6 @@
 {
   "index": "/index.html",
-  "configVersion": 1,
+  "configVersion": 2,
   "appData": {
     "name": "serviceworker"
   },
