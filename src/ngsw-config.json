@@ -1,5 +1,9 @@
 {
   "index": "/index.html",
+  "configVersion": 1,
+  "appData": {
+    "name": "serviceworker"
+  },
   "assetGroups": [{
     "name": "app",
     "installMode": "lazy",
