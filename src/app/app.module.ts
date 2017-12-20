@@ -12,6 +12,8 @@ import { Page1Component } from './pages/page1/page1.component';
 import { MenuComponent } from './menu/menu.component';
 import { Page2Component } from './pages/page2/page2.component';
 
+import { LogUpdateService } from './_services/log-update.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +28,7 @@ import { Page2Component } from './pages/page2/page2.component';
     AppRouting,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [],
+  providers: [LogUpdateService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
