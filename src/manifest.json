@@ -3,7 +3,7 @@
   "short_name": "ServiceWorker",
   "icons": [
     {
-      "src": "//assets/images.png",
+      "src": "/assets/images.png",
       "sizes": "255x255",
       "type": "image/png"
     },
