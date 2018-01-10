@@ -36,8 +36,12 @@ export class HomeComponent implements OnInit {
   subscribe() {
     if (!this._push.isEnabled) {
       this.push_enabled = 'False';
+
+      console.log('Key: ', this.push_key);
     } else {
       this.push_enabled = 'True';
+
+      console.log('Key: ', this.push_key);
 
       this._push.requestSubscription(this.push_key).then((sub) => { console.log(sub); });
     }
