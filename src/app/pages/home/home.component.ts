@@ -12,6 +12,7 @@ export class HomeComponent implements OnInit {
 
   push_enabled: string;
   push_key;
+  endpoint: string;
 
   constructor(
     private logUpdate: LogUpdateService,
@@ -21,6 +22,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.push_enabled = ' ';
     this.push_key = environment.push_public;
+    this.endpoint = ' ';
 
     this.logUpdate.checkAvailable().subscribe(event => {
       console.log('current version is', event.current);
@@ -43,7 +45,12 @@ export class HomeComponent implements OnInit {
 
       console.log('Key: ', this.push_key);
 
-      this._push.requestSubscription({serverPublicKey: this.push_key}).then((sub) => { console.log(sub); });
+      this._push.requestSubscription({serverPublicKey: this.push_key})
+        .then(
+          (sub) => {
+            console.log(sub);
+            this.endpoint = JSON.stringify(sub);
+          });
     }
   }
 
