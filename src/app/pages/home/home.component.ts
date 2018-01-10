@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LogUpdateService } from '../../_services/log-update.service';
 import { SwPush } from '@angular/service-worker';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -10,6 +11,7 @@ import { SwPush } from '@angular/service-worker';
 export class HomeComponent implements OnInit {
 
   push_enabled: string;
+  push_key;
 
   constructor(
     private logUpdate: LogUpdateService,
@@ -17,8 +19,8 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
     this.push_enabled = ' ';
+    this.push_key = environment.push_public;
 
     this.logUpdate.checkAvailable().subscribe(event => {
       console.log('current version is', event.current);
@@ -32,10 +34,12 @@ export class HomeComponent implements OnInit {
   }
 
   subscribe() {
-    if (this._push.isEnabled) {
-      this.push_enabled = 'True';
-    } else {
+    if (!this._push.isEnabled) {
       this.push_enabled = 'False';
+    } else {
+      this.push_enabled = 'True';
+
+      this._push.requestSubscription(this.push_key).then((sub) => { console.log(sub); });
     }
   }
 
