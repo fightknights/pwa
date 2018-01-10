@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit {
 
       console.log('Key: ', this.push_key);
 
-      this._push.requestSubscription(this.push_key).then((sub) => { console.log(sub); });
+      this._push.requestSubscription({serverPublicKey: this.push_key}).then((sub) => { console.log(sub); });
     }
   }
 
