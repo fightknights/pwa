@@ -53,7 +53,11 @@ export class HomeComponent implements OnInit {
           (sub) => {
             console.log(sub);
             this.endpoint = JSON.stringify(sub);
-            this.data.saveSubscription(sub);
+            this.data.saveSubscription(sub)
+              .subscribe((res) => {
+                console.log("worked");
+                console.log(res);
+              });
           });
     }
   }
