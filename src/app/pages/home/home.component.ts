@@ -3,6 +3,8 @@ import { LogUpdateService } from '../../_services/log-update.service';
 import { SwPush } from '@angular/service-worker';
 import { environment } from '../../../environments/environment';
 
+import { PushDataService } from '../../_services/push-data.service';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -16,7 +18,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private logUpdate: LogUpdateService,
-    private _push: SwPush
+    private _push: SwPush,
+    private data: PushDataService
   ) { }
 
   ngOnInit() {
@@ -50,6 +53,7 @@ export class HomeComponent implements OnInit {
           (sub) => {
             console.log(sub);
             this.endpoint = JSON.stringify(sub);
+            this.data.saveSubscription(sub);
           });
     }
   }

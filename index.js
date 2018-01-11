@@ -4,6 +4,8 @@ const path = require('path');
 
 var port = (process.env.PORT || process.env.VCAP_APP_PORT || 3000);
 
+var endpoints = [];
+
 app.enable('trust proxy');
 
 app.use (function (req, res, next) {
@@ -20,6 +22,26 @@ app.use(express.static(__dirname + '/dist'));
 
 var bodyParser = require('body-parser');
 var jsonParser = bodyParser.json();
+
+app.post('/api/save-subscription/', function (req, res) {
+    // Check the request body has at least an endpoint.
+    if (!req.body || !req.body.endpoint) {
+      // Not a valid subscription.
+      res.status(400);
+      res.setHeader('Content-Type', 'application/json');
+      res.send(JSON.stringify({
+        error: {
+          id: 'no-endpoint',
+          message: 'Subscription must have an endpoint.'
+        }
+      }));
+    } else {
+      endpoints.push(req.body);
+      console.log("======= Endpoint received");
+      res.setHeader('Content-Type', 'application/json');
+      res.send(JSON.stringify({ data: { success: true } }));
+    }
+});
 
 app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname + '/dist/index.html'));
