@@ -10,7 +10,7 @@ export class PushDataService {
 
   saveSubscription(endpoint) {
 
-    return this.http.post('/api/save-subscription', JSON.stringify(endpoint) );
+    return this.http.post('/api/save-subscription', endpoint );
   }
 
   sendNotification(title) {
