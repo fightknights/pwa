@@ -36,8 +36,7 @@ app.post('/api/save-subscription', function (req, res) {
       res.send(JSON.stringify({
         error: {
           id: 'no-body',
-          message: 'Subscription must have a body',
-          request: req
+          message: 'Subscription must have a body'
         }
       }));
     } else if (!req.body.endpoint) {
