@@ -23,6 +23,10 @@ app.use(express.static(__dirname + '/dist'));
 var bodyParser = require('body-parser');
 var jsonParser = bodyParser.json();
 
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname + '/dist/index.html'));
+});
+
 app.post('/api/save-subscription/', function (req, res) {
     // Check the request body has at least an endpoint.
     if (!req.body || !req.body.endpoint) {
@@ -37,14 +41,14 @@ app.post('/api/save-subscription/', function (req, res) {
       }));
     } else {
       endpoints.push(req.body);
-      console.log("======= Endpoint received");
+
       res.setHeader('Content-Type', 'application/json');
       res.send(JSON.stringify({ data: { success: true } }));
     }
 });
 
-app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname + '/dist/index.html'));
+app.get('/api/send-push', function (req, res) {
+  res.json(endpoints);
 });
 
 app.listen(port, function(){
