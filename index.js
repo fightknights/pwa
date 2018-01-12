@@ -27,9 +27,19 @@ app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname + '/dist/index.html'));
 });
 
-app.post('/api/save-subscription/', function (req, res) {
+app.post('/api/save-subscription', function (req, res) {
     // Check the request body has at least an endpoint.
-    if (!req.body || !req.body.endpoint) {
+    if (!req.body) {
+      // Not a valid subscription.
+      res.status(400);
+      res.setHeader('Content-Type', 'application/json');
+      res.send(JSON.stringify({
+        error: {
+          id: 'no-body',
+          message: 'Subscription must have a body'
+        }
+      }));
+    } else if (!req.body.endpoint) {
       // Not a valid subscription.
       res.status(400);
       res.setHeader('Content-Type', 'application/json');
