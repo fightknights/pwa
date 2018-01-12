@@ -25,6 +25,11 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
+app.get('/', function(req, res) {
+  console.log("get index");
+  res.sendFile(path.join(__dirname + '/dist/index.html'));
+});
+
 app.post('/api/save-subscription', function (req, res) {
   if (!req.body || !req.body.endpoint) {
     // Not a valid subscription.
@@ -45,12 +50,10 @@ app.post('/api/save-subscription', function (req, res) {
 });
 
 app.get('/api/send-push', function (req, res) {
-  res.json(endpoints);
+  console.log("get send push");
+  res.send(JSON.stringify(endpoints));
 });
 
-app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname + '/dist/index.html'));
-});
 
 app.listen(port, function(){
   console.log('Node app is running on port', port);
