@@ -9,7 +9,7 @@ var endpoints = [];
 
 app.enable('trust proxy');
 
-/*app.use (function (req, res, next) {
+app.use (function (req, res, next) {
   if (req.secure) {
     // request was via https, so do no special handling
     next();
@@ -17,7 +17,7 @@ app.enable('trust proxy');
     // request was via http, so redirect to https
     res.redirect('https://' + req.headers.host + req.url);
   }
-});*/
+});
 
 app.use(express.static(__dirname + '/dist'));
 app.use(bodyParser.urlencoded({
