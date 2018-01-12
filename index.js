@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 const path = require('path');
-var bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 
 var port = (process.env.PORT || process.env.VCAP_APP_PORT || 3000);
 
@@ -20,8 +20,9 @@ app.enable('trust proxy');
 });*/
 
 app.use(express.static(__dirname + '/dist'));
-
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 app.use(bodyParser.json());
 
 app.get('/', function(req, res) {
@@ -29,34 +30,22 @@ app.get('/', function(req, res) {
 });
 
 app.post('/api/save-subscription', function (req, res) {
-    // Check the request body has at least an endpoint.
-  if (!req.body) {
-      // Not a valid subscription.
-      res.status(400);
-      res.setHeader('Content-Type', 'application/json');
-      res.send(JSON.stringify({
-        error: {
-          id: 'no-body',
-          message: 'Subscription must have a body'
-        }
-      }));
-    } else if (!req.body.endpoint) {
-      // Not a valid subscription.
-      console.log("Request body: ", req.body);
-      res.status(400);
-      res.setHeader('Content-Type', 'application/json');
-      res.send(JSON.stringify({
-        error: {
-          id: 'no-endpoint',
-          message: 'Subscription must have an endpoint.'
-        }
-      }));
-    } else {
-      endpoints.push(req.body);
+  if (!req.body || !req.body.endpoint) {
+    // Not a valid subscription.
+    res.status(400);
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify({
+      error: {
+        id: 'no-endpoint',
+        message: 'Subscription must have an endpoint.'
+      }
+    }));
+  } else {
+    endpoints.push(req.body);
 
-      res.setHeader('Content-Type', 'application/json');
-      res.send(JSON.stringify({ data: { success: true } }));
-    }
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify({ data: { success: true } }));
+  }
 });
 
 app.get('/api/send-push', function (req, res) {
